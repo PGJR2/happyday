@@ -1,0 +1,161 @@
+/*
+  Portfolio Styles — Modern Clean
+  -------------------------------------------------
+  Plug this file in your HTML: <link rel="stylesheet" href="styles.css">
+  Works with the HTML skeleton I provided. Adjust variables to re‑theme.
+*/
+
+/* ===== CSS Reset (lightweight) ===== */
+*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+  all: unset;
+  display: revert;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html:focus-within { scroll-behavior: smooth; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+/* ===== Theme Tokens ===== */
+:root {
+  --bg: #ffffff;
+  --fg: #0f172a; /* slate-900 */
+  --muted: #64748b; /* slate-500 */
+  --border: #e2e8f0; /* slate-200 */
+  --elev: #f8fafc;   /* slate-50 */
+  --accent: #2563eb; /* blue-600 */
+  --accent-600: #2563eb;
+  --accent-700: #1d4ed8;
+  --shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 8px 24px rgba(15, 23, 42, .06);
+
+  --radius: 14px;
+  --pad: 1rem;
+  --maxw: 1100px;
+
+  --step--1: clamp(.85rem, .82rem + .1vw, .95rem);
+  --step-0:  clamp(1rem, .98rem + .2vw, 1.125rem);
+  --step-1:  clamp(1.25rem, 1.1rem + .7vw, 1.65rem);
+  --step-2:  clamp(1.6rem, 1.2rem + 1.3vw, 2.25rem);
+  --step-3:  clamp(2rem, 1.4rem + 2.2vw, 3rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;   /* deep slate */
+    --fg: #e6edf6;   /* light */
+    --muted: #9fb0c7; 
+    --border: #1f2937;
+    --elev: #0f172a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .25), 0 8px 24px rgba(0, 0, 0, .35);
+    --accent: #60a5fa; /* blue-400 */
+    --accent-600: #3b82f6;
+    --accent-700: #2563eb;
+  }
+}
+
+/* ===== Base ===== */
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+.prose p { color: var(--muted); }
+
+/* ===== Header & Nav ===== */
+header {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(10px);
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem var(--pad); max-width: var(--maxw); margin-inline: auto; }
+.brand { font-weight: 800; letter-spacing: .2px; font-size: 1.05rem; }
+.nav ul { list-style: none; display: flex; gap: .75rem; }
+.nav a { padding: .5rem .75rem; border-radius: 10px; color: var(--muted); transition: background .2s ease, color .2s ease; }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--fg); background: var(--elev); }
+
+/* ===== Sections ===== */
+main { max-width: var(--maxw); margin-inline: auto; padding: 2rem var(--pad) 4rem; }
+section { padding-block: clamp(2.5rem, 3vw, 4rem); border-bottom: 1px solid var(--border); }
+section:last-of-type { border-bottom: none; }
+
+h1 { font-size: var(--step-3); line-height: 1.15; letter-spacing: -.02em; margin-bottom: .6rem; }
+h2 { font-size: var(--step-2); line-height: 1.15; letter-spacing: -.01em; margin-bottom: 1rem; }
+h3 { font-size: var(--step-1); margin-bottom: .75rem; }
+.tagline { color: var(--muted); max-width: 60ch; }
+
+/* ===== Buttons & Links ===== */
+.button, .cta, button, input[type="submit"] {
+  padding: .7rem 1rem; border-radius: 12px; font-weight: 600; 
+  border: 1px solid color-mix(in oklab, var(--accent-600) 30%, var(--fg));
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 30%, var(--bg)), color-mix(in oklab, var(--accent-700) 18%, var(--bg)));
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+}
+.button:hover, .cta:hover, button:hover, input[type="submit"]:hover { transform: translateY(-1px); }
+.button:active, .cta:active, button:active, input[type="submit"]:active { transform: translateY(0); box-shadow: none; }
+
+/* ===== Cards & Surfaces ===== */
+.card { background: var(--elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+.surface { background: var(--elev); border: 1px solid var(--border); border-radius: var(--radius); }
+
+/* ===== Hero ===== */
+.hero { display: grid; gap: 1.25rem; align-items: center; }
+.hero-visual { background: repeating-linear-gradient(135deg, color-mix(in oklab, var(--elev) 90%, transparent), color-mix(in oklab, var(--elev) 90%, transparent) 10px, transparent 10px, transparent 20px);
+  border: 1px dashed var(--border); border-radius: var(--radius); aspect-ratio: 4/3; display: grid; place-items: center; color: var(--muted); font-size: .95rem; }
+@media (min-width: 800px) { .hero { grid-template-columns: 1.25fr 1fr; } }
+
+/* ===== About ===== */
+.about-grid { display: grid; gap: 1rem; }
+@media (min-width: 800px) { .about-grid { grid-template-columns: 2fr 1fr; } }
+
+/* ===== Portfolio Grid ===== */
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.work { background: var(--elev); border: 1px solid var(--border); border-radius: var(--radius); overflow: clip; box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease; }
+.work:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,.05), 0 16px 40px rgba(0,0,0,.08); }
+.work figure { display: grid; grid-template-rows: auto 1fr; }
+.work img { aspect-ratio: 4/3; object-fit: cover; }
+.work figcaption { padding: .8rem 1rem; color: var(--muted); border-top: 1px solid var(--border); font-size: var(--step--1); }
+.work strong { color: var(--fg); }
+
+/* ===== Forms ===== */
+form { display: grid; gap: .9rem; max-width: 680px; }
+label { font-weight: 700; font-size: .95rem; color: var(--fg); }
+input, textarea { width: 100%; padding: .8rem .9rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--fg); box-shadow: inset 0 1px 0 rgba(0,0,0,.02); }
+input::placeholder, textarea::placeholder { color: color-mix(in oklab, var(--muted) 80%, var(--bg)); }
+input:focus, textarea:focus { border-color: var(--accent-600); outline: 3px solid color-mix(in oklab, var(--accent) 35%, transparent); outline-offset: 2px; }
+
+/* ===== Footer ===== */
+footer { border-top: 1px solid var(--border); color: var(--muted); text-align: center; padding: 1rem var(--pad) 2rem; }
+
+/* ===== Utilities ===== */
+.max-w-prose { max-width: 65ch; }
+.center { display: grid; place-items: center; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+.round { border-radius: var(--radius) }
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 640px) {
+  .nav ul { gap: .25rem; }
+  .nav a { padding: .45rem .55rem; }
+  section { padding-block: 2rem; }
+}
+
+/* ===== Motion & Prefs ===== */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ===== Optional Accent Variants ===== */
+.theme-emerald { --accent: #10b981; --accent-600:#059669; --accent-700:#047857; }
+.theme-violet  { --accent: #7c3aed; --accent-600:#6d28d9; --accent-700:#5b21b6; }
+.theme-rose    { --accent: #f43f5e; --accent-600:#e11d48; --accent-700:#be123c; }
